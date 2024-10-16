@@ -1,55 +1,31 @@
-import {
-  IsString,
-  IsEmail,
-  IsOptional,
-  Length,
-  IsBoolean,
-  IsNumber,
-  IsDate,
-  IsNotEmpty,
-} from 'class-validator';
+import { Field, InputType } from '@nestjs/graphql';
 
+@InputType()
 export class CreateWorkerDto {
-  @IsString()
-  @Length(1, 100)
+  @Field()
   full_name: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @Field()
   birth_date: string;
 
-  @IsNumber()
+  @Field()
   experience: number;
 
-  @IsEmail()
+  @Field()
   email: string;
 
-  @IsOptional()
-  @IsString()
-  @Length(0, 15)
+  @Field({ nullable: true })
   phone_number?: string;
 
-  @IsOptional()
-  @IsString()
+  @Field({ nullable: true })
   tg_link?: string;
 
-  @IsString()
-  @Length(6, 50)
+  @Field()
   password: string;
 
-  @IsString()
-  @Length(6, 50)
-  confirm_password: string;
+  @Field({ nullable: true })
+  is_active?: boolean;
 
-  @IsOptional()
-  @IsString()
-  hashed_refresh_token: string;
-
-  @IsOptional()
-  @IsBoolean()
-  is_active: boolean;
-
-  @IsOptional()
-  @IsString()
-  description: string;
+  @Field({ nullable: true })
+  description?: string;
 }

@@ -1,4 +1,31 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateWorkerDto } from './create-worker.dto';
+import { Field, InputType } from '@nestjs/graphql';
 
-export class UpdateWorkerDto extends PartialType(CreateWorkerDto) {}
+@InputType()
+export class UpdateWorkerDto {
+  @Field({ nullable: true })
+  full_name?: string;
+
+  @Field({ nullable: true })
+  birth_date?: string;
+
+  @Field({ nullable: true })
+  experience?: number;
+
+  @Field({ nullable: true })
+  email?: string;
+
+  @Field({ nullable: true })
+  phone_number?: string;
+
+  @Field({ nullable: true })
+  tg_link?: string;
+
+  @Field({ nullable: true })
+  password?: string;
+
+  @Field({ nullable: true })
+  is_active?: boolean;
+
+  @Field({ nullable: true })
+  description?: string;
+}

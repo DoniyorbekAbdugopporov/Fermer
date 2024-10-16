@@ -1,49 +1,40 @@
-import {
-  IsString,
-  IsEmail,
-  IsOptional,
-  Length,
-  IsBoolean,
-} from 'class-validator';
+import { Field, InputType } from '@nestjs/graphql';
+import { IsEmail, IsOptional, IsBoolean, Length } from 'class-validator';
 
+@InputType()
 export class CreateAdminDto {
-  @IsString()
-  @Length(1, 100)
+  @Field()
   full_name: string;
 
+  @Field()
   @IsEmail()
   email: string;
 
+  @Field({ nullable: true })
   @IsOptional()
-  @IsString()
-  @Length(0, 15)
   phone_number?: string;
 
+  @Field({ nullable: true })
   @IsOptional()
-  @IsString()
   tg_link?: string;
 
-  @IsString()
-  @Length(6, 50)
+  @Field()
+  @Length(6, 20)
   password: string;
 
-  @IsString()
-  @Length(6, 50)
+  @Field()
+  @Length(6, 20)
   confirm_password: string;
 
-  @IsOptional()
-  @IsString()
-  hashed_refresh_token: string;
-
-  @IsOptional()
+  @Field({ nullable: true, defaultValue: true })
   @IsBoolean()
-  is_active: boolean;
+  is_active?: boolean;
 
-  @IsOptional()
+  @Field({ nullable: true, defaultValue: false })
   @IsBoolean()
-  is_creator: boolean;
+  is_creator?: boolean;
 
+  @Field({ nullable: true })
   @IsOptional()
-  @IsString()
-  description: string;
+  description?: string;
 }
