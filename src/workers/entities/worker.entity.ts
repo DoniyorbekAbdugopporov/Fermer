@@ -4,9 +4,12 @@ import {
   PrimaryGeneratedColumn,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
 import { Role } from '../../roles/entities/role.entity';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Milking } from '../../milking/entities/milking.entity';
+import { Health } from '../../health/entities/health.entity';
 
 @ObjectType()
 @Entity()
@@ -59,4 +62,13 @@ export class Worker {
   @ManyToMany(() => Role, (role) => role.workers)
   @JoinTable()
   roles: Role[];
+
+  // `Milking` bilan bog'lanish
+  @Field(() => [Milking])
+  @OneToMany(() => Milking, (milking) => milking.worker)
+  milkings: Milking[];
+
+  @Field(() => [Health])
+  @OneToMany(() => Health, (health) => health.worker, { eager: true })
+  healths: Health[];
 }

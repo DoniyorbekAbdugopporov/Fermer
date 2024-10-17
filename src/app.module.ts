@@ -11,6 +11,13 @@ import { Role } from './roles/entities/role.entity';
 import { WorkerRoleModule } from './worker_role/worker_role.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { MilkingModule } from './milking/milking.module';
+import { SpeciesModule } from './species/species.module';
+import { BreedsModule } from './breeds/breeds.module';
+import { AnimalsModule } from './animals/animals.module';
+import { DiagnosisModule } from './diagnosis/diagnosis.module';
+import { TreatmentModule } from './treatment/treatment.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -28,7 +35,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       username: process.env.POSTGRES_USERNAME,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      entities: [Admin, Worker, Role],
+      entities: [__dirname + 'disc/**/*.entity{.ts,.js}'],
       synchronize: true,
       autoLoadEntities: true,
       logging: false,
@@ -38,6 +45,13 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
     WorkersModule,
     RolesModule,
     WorkerRoleModule,
+    SpeciesModule,
+    MilkingModule,
+    BreedsModule,
+    AnimalsModule,
+    DiagnosisModule,
+    TreatmentModule,
+    HealthModule,
   ],
   controllers: [],
   providers: [],
